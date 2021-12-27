@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @since   2021-12-25
  */
 
+// TODO: add comments to all methods
 public class APIConnector {
     // attributes
     // private Converter curConversion;
@@ -78,6 +80,9 @@ public class APIConnector {
         try {
             request = (HttpURLConnection) APIurl.openConnection();
             // request.connect();
+        } catch (UnknownHostException uhex) {
+            System.out.println("Please verify if your internet connection is working.");
+            uhex.printStackTrace();
         } catch (IOException ioex) {
             ioex.printStackTrace();
         } catch (NullPointerException np) {
@@ -87,6 +92,7 @@ public class APIConnector {
     }
 
     public JsonObject getJSONfromAPI () {
+        // TODO throw java.net.UnknownHostException exception
         // call helper methods
         URL apiURL = this.constructURL();
         HttpURLConnection request = this.createHttpURLConnection(apiURL);
@@ -111,7 +117,14 @@ public class APIConnector {
     }
 
     public double getExchangeRate (JsonObject apiResponse) throws UnsupportedOperationException {
-        JsonElement exchangeRate = apiResponse.getAsJsonObject("info").get("rate");
+        JsonElement exchangeRate = null;
+        try {
+            exchangeRate = apiResponse.getAsJsonObject("info").get("rate");
+        } catch (NullPointerException npex) {
+            System.out.println("Seems like no data was returned from the API. Check your internet connection");
+            npex.printStackTrace();
+        }
+
         if (exchangeRate == null) {
             throw new UnsupportedOperationException("Invalid base or target currency");
         } else {

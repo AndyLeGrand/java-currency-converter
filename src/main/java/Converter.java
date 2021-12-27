@@ -2,7 +2,7 @@ import com.google.gson.JsonObject;
 
 import java.util.Scanner;
 
-
+// TODO: add comments to all methods
 public class Converter
 {
     //attributes
