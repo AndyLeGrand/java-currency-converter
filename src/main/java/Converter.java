@@ -68,19 +68,28 @@ public class Converter
         try {
             // TODO: api endpoint handles invalid base currencies automatically as eur
             // find a way to deal with this
-            Scanner userInput = new Scanner(System.in);
-            System.out.println("Enter currency from which you whish to convert: ");
-            String fromCurrency = userInput.nextLine();
+            String continued = new String("y");
 
-            System.out.println("Enter currency to which you whish to convert: ");
-            String toCurrency = userInput.nextLine();
+            while (true) {
+                if (continued.equals("y")) {
+                    Scanner userInput = new Scanner(System.in);
+                    System.out.println("Enter currency from which you whish to convert: ");
+                    String fromCurrency = userInput.nextLine();
 
-            System.out.println("Enter amount: ");
-            double amount = Double.parseDouble(userInput.nextLine());
+                    System.out.println("Enter currency to which you whish to convert: ");
+                    String toCurrency = userInput.nextLine();
 
-            Converter curConversion = new Converter(fromCurrency, toCurrency, amount);
+                    System.out.println("Enter amount: ");
+                    double amount = Double.parseDouble(userInput.nextLine());
 
-            curConversion.print();
+                    Converter curConversion = new Converter(fromCurrency, toCurrency, amount);
+
+                    curConversion.print();
+
+                    System.out.println("\nDo you wish to continue with another conversion (y/n): ");
+                    continued = userInput.nextLine();
+                } else break;
+            }
 
         } catch (NumberFormatException nfex) {
             System.out.println("Please enter numerical value.");
