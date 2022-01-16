@@ -3,6 +3,9 @@ import com.google.gson.JsonObject;
 import java.util.Scanner;
 
 // TODO: add comments to all methods
+// TODO: add feature: as of now, a user has to know which currencies are available via API and what their
+// TODO: shorthand is; goal: allow user for String search and make suggestion for currencies that contain this string
+
 public class Converter
 {
     //attributes
@@ -90,7 +93,6 @@ public class Converter
                     continued = userInput.nextLine();
                 } else break;
             }
-
         } catch (NumberFormatException nfex) {
             System.out.println("Please enter numerical value.");
             nfex.printStackTrace();
