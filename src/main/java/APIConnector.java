@@ -44,7 +44,8 @@ public class APIConnector {
 
     //methods
     /**
-     * This method returns a Java URL object under which the API can be reached.
+     * This method returns a Java URL object under which the api.exchangerate.host API
+     * endpoint for currency conversion can be reached.
      * @param
      * @return apiURL This is the Java URL object .
      */
